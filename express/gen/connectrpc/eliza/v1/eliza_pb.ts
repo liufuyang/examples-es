@@ -21,6 +21,32 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
+ * @generated from enum connectrpc.eliza.v1.State
+ */
+export enum State {
+  /**
+   * @generated from enum value: UNKNOWN = 0;
+   */
+  UNKNOWN = 0,
+
+  /**
+   * @generated from enum value: A = 1;
+   */
+  A = 1,
+
+  /**
+   * @generated from enum value: B = 2;
+   */
+  B = 2,
+}
+// Retrieve enum metadata with: proto3.getEnumType(State)
+proto3.util.setEnumType(State, "connectrpc.eliza.v1.State", [
+  { no: 0, name: "UNKNOWN" },
+  { no: 1, name: "A" },
+  { no: 2, name: "B" },
+]);
+
+/**
  * SayRequest is a single-sentence request.
  *
  * @generated from message connectrpc.eliza.v1.SayRequest
@@ -31,6 +57,11 @@ export class SayRequest extends Message<SayRequest> {
    */
   sentence = "";
 
+  /**
+   * @generated from field: connectrpc.eliza.v1.State state = 2;
+   */
+  state = State.UNKNOWN;
+
   constructor(data?: PartialMessage<SayRequest>) {
     super();
     proto3.util.initPartial(data, this);
@@ -40,6 +71,7 @@ export class SayRequest extends Message<SayRequest> {
   static readonly typeName = "connectrpc.eliza.v1.SayRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "sentence", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "state", kind: "enum", T: proto3.getEnumType(State) },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SayRequest {

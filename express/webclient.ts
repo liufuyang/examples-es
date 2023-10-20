@@ -1,7 +1,7 @@
 import { createPromiseClient } from "@connectrpc/connect";
-import { createConnectTransport } from "@connectrpc/connect-web";
+import { createConnectTransport, createGrpcWebTransport } from "@connectrpc/connect-web";
 import { ElizaService } from "./gen/connectrpc/eliza/v1/eliza_connect.js";
-import { IntroduceRequest } from "./gen/connectrpc/eliza/v1/eliza_pb.js";
+import {IntroduceRequest, State} from "./gen/connectrpc/eliza/v1/eliza_pb.js";
 
 let introFinished = false;
 
@@ -48,8 +48,19 @@ async function send() {
   inputEl.value = "";
 
   if (introFinished) {
+
+    const s: string = "A"
+    const stateA = State[s as keyof typeof State]
+    const stateB = State.B
+    console.log(stateA)
+    console.log(typeof stateA)
+    console.log(stateB)
+    console.log(typeof stateB)
+
+    console.log(State)
+
     const response = await client.say({
-      sentence,
+      sentence, state: stateA
     });
 
     addNode(response.sentence, "eliza");
